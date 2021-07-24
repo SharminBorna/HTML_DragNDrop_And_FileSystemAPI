@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>DragNDropPuzzle</title>
+    <style type="text/css">
+        html {
+            background-color:#87a4aa;
+        }
+        #container {
+            width: 396px;
+            height: 396px;
+            background-color: #216f92;
+            margin: 50px auto;
+            border: 4px solid #1e6b48;
+        }
+        .hole {
+            width: 128px;
+            height: 128px;
+            background-color:#1aae81;
+            border: 2px solid #1b1665;
+            float: left;
+        }
+        .item {
+            font-family:'Book Antiqua';
+            font-size: 100px;
+            text-align: center;
+        }
+        #link{
+            float:right;
+            margin-right:300px;
+        }
+        a{
+            font-size:1.5em;
+            color:#1b1665;
+            text-decoration:none;
+        }
+    </style>
+    <script src="Scripts/jquery-3.5.1.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div id="hole1" class="hole">
+            <div id="item1" class="item" draggable="true">D</div>
+        </div>
+        <div id="hole2" class="hole">
+            <div id="item2" class="item" draggable="true">E</div>
+        </div>
+        <div id="hole3" class="hole">
+            <div id="item3" class="item" draggable="true">B</div>
+        </div>
+        <div id="hole4" class="hole">
+            <div id="item4" class="item" draggable="true">C</div>
+        </div>
+        <div id="hole5" class="hole">
+            <div id="item5" class="item" draggable="true">A</div>
+        </div>
+        <div id="hole6" class="hole">
+            <div id="item6" class="item" draggable="true">H</div>
+        </div>
+        <div id="hole7" class="hole">
+            <div id="item7" class="item" draggable="true">F</div>
+        </div>
+        <div id="hole8" class="hole">
+            <div id="item8" class="item" draggable="true">G</div>
+        </div>
+        <div id="hole9" class="hole">
+
+        </div>
+    </div>
+    <div id="link">
+        <a href="./Project_FileSystemAPI.html">Please Click Here...</a>
+    </div>
+
+    <script>
+        var $di;
+        $(document).ready(function () {
+            $(".item").on("dragstart", dragging);
+            $(".item").on("dragend", draggingend);
+
+            $(".hole").on("dragenter", preventDefault);
+            $(".hole").on("dragover", preventDefault);
+            $(".hole").on("drop", dropitem);
+        })
+        function dragging(e) {
+            $(e.target).addClass("dragging");
+            $di = $(e.target);
+        }
+        function draggingend(e) {
+            $(e.target).removeClass("dragging");
+        }
+        function preventDefault(e) {
+            e.preventDefault();
+        }
+        function dropitem(e) {
+            var hole = $(e.target);
+            if (hole.hasClass('hole') && hole.children().length == 0) {
+                $di.detach();
+                $di.appendTo($(e.target));
+            }
+        }
+    </script>
+</body>
+</html>
